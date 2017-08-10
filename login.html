@@ -1,0 +1,143 @@
+<html lang="pt-br">
+    <head>  
+        <title></title>
+        <link href="_inst/bootstrap/css/bootstrap.min.css">
+       
+        <script src="_inst/bootstrap/js/jquery-3.1.0.min.js"></script>   
+
+        <link href="_inst/bootstrap/css/estilo_login_inst.css" rel="stylesheet">
+        <link href="icon/css/font-awesome.css" rel="stylesheet">
+    
+        <script type="text/javascript">
+           
+            $(window, document, undefined).ready(function() {
+ 
+                        $('input').blur(function() {
+
+
+                          var $this = $(this);
+                          if ($this.val())
+                            $this.addClass('used');
+                          else
+                            $this.removeClass('used');
+                        });
+
+                        var $ripples = $('.ripples');
+
+                        $ripples.on('click.Ripples', function(e) {
+
+                                          var $this = $(this);
+                                          var $offset = $this.parent().offset();
+                                          var $circle = $this.find('.ripplesCircle');
+
+                                          var x = e.pageX - $offset.left;
+                                          var y = e.pageY - $offset.top;
+
+                                          $circle.css({
+                                              top: y + 'px',
+                                              left: x + 'px'
+                                          });
+
+                                          $this.addClass('is-active');
+
+                                      });
+
+                                      $ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd', function (e) {
+                                          $(this).removeClass('is-active');
+                                      });
+
+
+            });
+            
+            
+            
+            window.addEventListener('DOMContentLoaded', function() {
+            var speakBtn = document.querySelector('#speakBtn');
+            
+            // testa se o navegador suporta o reconhecimento de voz
+            if (window.SpeechRecognition || window.webkitSpeechRecognition) {
+                // captura a voz
+                var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+                var recognition = new SpeechRecognition();
+                // inicia reconhecimento
+                speakBtn.addEventListener('click', function(e) {
+                    var icon = document.getElementById('iconPlay');
+                    icon.setAttribute('class', 'fa fa-play');
+                    recognition.start();
+                    
+                }, false);
+              
+                   
+               
+                // resultado do reconhecimento
+                recognition.addEventListener('result', function(e) {
+                    console.log(e);
+                    var result = e.results[0][0].transcript;
+                    console.log(result);
+                    var icon = document.getElementById('iconPlay');
+                    icon.setAttribute('class', 'fa fa-play-circle');
+                    if (result.toLowerCase() === 'exemplo') {
+                        
+                        document.getElementById("exemplo1").value = 'exemplo@gmail.com';
+                        document.getElementById("exemplo2").value = '12345678';
+                        var email = document.getElementById('exemplo1'); 
+                        email.setAttribute('class','used');
+                        var senha = document.getElementById('exemplo2'); 
+                        senha.setAttribute('class','used');
+                        
+                       
+                    } else if(result.toLowerCase() === 'entrar no sistema'){
+                        $('.button').trigger('click');
+                    } else if (result.toLowerCase() === '') {
+                        
+                        var icon = document.getElementById('iconPlay');
+                    icon.setAttribute('class', 'fa fa-play-circle');
+                       
+                    }
+                    // window.location.href = 'http://' + result;
+                }, false);
+            } else {
+                alert('Este navegador não suporta esta funcionalidade ainda!');
+            }
+        }, false);
+        </script>
+        
+    <script src="_inst/bootstrap/js/bootstrap.min.js"></script>
+
+
+    </head>
+
+    
+    <body>
+        <div class="page-black">  </div>
+        <hgroup class="z-hgroup">
+            <h1>Acesso Institucional</h1>
+            <h3>Por EasyDonation</h3>
+        </hgroup>
+        <form class="z-form" action="_inst/crud/verificacao_acesso.php" method="post">
+            <div class="group">
+                <input type="email" id="exemplo1" name="email"><span class="highlight"></span><span class="bar"></span>
+                <label>Email</label>
+            </div>
+            <div class="group">
+                <input type="password" id="exemplo2" name="senha"><span class="highlight"></span><span class="bar"></span>
+                <label>Senha</label>
+            </div>
+            <button type="submit" name="acao" class="button buttonBlue">Entrar
+                <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+            </button>  
+            
+            <button type="button" id="speakBtn" class="btn btn-default btn-group-lg"><i id="iconPlay" class="fa fa-play-circle" aria-hidden="true"></i></button>
+        </form>
+        <footer><a href="index.php" target="_blank"><img src="_inst/bootstrap/img/easy1.png" width="180"/></a>
+            <p lang="pt-br"> Você tem que amar <a href="index.php" target="_blank">Google</a></p>
+        </footer>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+  
+        
+
+        <!-- Bootstrap Core JavaScript -->
+       
+    </body>
+</html>

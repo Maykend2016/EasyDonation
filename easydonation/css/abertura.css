@@ -1,0 +1,23 @@
+body{
+    background-image: url(../front/img/ajuda.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+
+}
+h1,h2,h3,h4,h5,h6,a.formatoTexto{
+    font-family: "Arial", sans-serif;
+    color: white;
+
+}
+.header-content{
+    position:relative;
+    width:100%;
+    text-align:center;
+    margin-top: 15%;
+}
+.btn-rd{
+    border-radius: 20px;
+}
+
